@@ -1,0 +1,122 @@
+
+<main class="study-page">
+  <a class="back-link" routerLink="/">
+    ← Back to HSK levels
+  </a>
+
+  <header class="study-header">
+    <p class="eyebrow">VOCABULARY STUDY</p>
+    <h1>HSK {{ level() }}</h1>
+    <p class="subtitle">
+      Learn each word's Chinese characters, pinyin, and meaning.
+    </p>
+  </header>
+
+  @if (loading()) {
+    <p class="status" role="status">Loading vocabulary...</p>
+  } @else if (error()) {
+    <div class="error" role="alert">
+      <p>{{ error() }}</p>
+      <button type="button" (click)="loadPage(page())">
+        Try again
+      </button>
+    </div>
+  } @else {
+    <section aria-labelledby="word-list-heading">
+      <div class="list-heading">
+        <h2 id="word-list-heading">Study words</h2>
+        <p>{{ totalCount() }} words in this level</p>
+      </div>
+
+      
+        <!-- VOCABULARY FLASHCARDS -->
+        <div class="word-grid">
+
+            @for (word of words(); track word.id) {
+                <div
+                class="flashcard"
+                [class.flipped]="isCardFlipped(word.id)"
+                (click)="toggleCard(word.id)"
+                (keydown.enter)="toggleCard(word.id)"
+                (keydown.space)="
+                    $event.preventDefault();
+                    toggleCard(word.id)
+                "
+                role="button"
+                tabindex="0"
+                [attr.aria-label]="
+                    'Vocabulary flashcard for ' + word.simplified
+                "
+                [attr.aria-pressed]="isCardFlipped(word.id)"
+                >
+                <div class="flashcard-inner">
+
+                    <!-- FRONT -->
+                    <div class="flashcard-front">
+                    <div class="hanzi" lang="zh">
+                        {{ word.simplified }}
+                    </div>
+
+                    <div class="pinyin">
+                        {{ word.pinyin }}
+                    </div>
+
+                    <span class="flip-hint desktop-hint">
+                        Hover to reveal meaning
+                    </span>
+
+                    <span class="flip-hint mobile-hint">
+                        Tap to reveal meaning
+                    </span>
+                    </div>
+
+                    <!-- BACK -->
+                    <div class="flashcard-back">
+                    <div class="meaning">
+                        {{ word.meaning }}
+                    </div>
+
+                    <span class="flip-hint desktop-hint">
+                        Move away to flip back
+                    </span>
+
+                    <span class="flip-hint mobile-hint">
+                        Tap to flip back
+                    </span>
+                    </div>
+
+                </div>
+                </div>
+            } @empty {
+                <p>No vocabulary words were found for this level.</p>
+            }
+
+        </div>
+
+
+      @if (totalPages() > 0) {
+        <nav class="pagination" aria-label="Vocabulary pages">
+          <button
+            type="button"
+            (click)="previousPage()"
+            [disabled]="page() <= 1"
+          >
+            ← Previous
+          </button>
+
+          <span>
+            Page {{ page() }} of {{ totalPages() }}
+          </span>
+
+          <button
+            type="button"
+            (click)="nextPage()"
+            [disabled]="page() >= totalPages()"
+          >
+            Next →
+          </button>
+        </nav>
+      }
+    </section>
+  }
+</main>

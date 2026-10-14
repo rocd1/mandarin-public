@@ -76,6 +76,9 @@ INSTALLED_APPS = [
     "corsheaders",
     "csp",
 
+    # Local Apps
+    "learning.apps.LearningConfig",
+
 ]
 
 

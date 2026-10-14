@@ -1,16 +1,45 @@
+
 <main class="landing-page">
-  <section class="hero">
-    <p class="eyebrow">PUBLIC LEARNING APP</p>
-
-    <h1>Learn at your own pace.</h1>
-
+  <header class="hero">
+    <p class="eyebrow">MANDARIN VOCABULARY</p>
+    <h1>Learn Chinese, one word at a time.</h1>
     <p class="subtitle">
-      A public Django REST Framework and Angular starter for learning experiences
-      that do not require accounts or sign-in.
+      Explore HSK vocabulary, learn pinyin and meanings, and practise
+      with quizzes. No account required.
+    </p>
+  </header>
+
+  <section class="levels-section" aria-labelledby="levels-heading">
+    <h2 id="levels-heading">Choose your HSK level</h2>
+    <p class="section-description">
+      Start with the level that suits you.
     </p>
 
-    <p class="subtitle">
-      Add your learning flow, lessons, quizzes, and public API endpoints here.
-    </p>
+    @if (loading()) {
+      <p class="status" role="status">Loading HSK levels...</p>
+    } @else if (error()) {
+      <p class="error" role="alert">{{ error() }}</p>
+    } @else {
+      @for (level of levels(); track level.id) {
+        <a
+          class="level-card"
+          [routerLink]="['/study', level.order]"
+          [attr.aria-label]="'Study ' + level.name + ' vocabulary'"
+        >
+          <div class="level-number">{{ level.order }}</div>
+
+          <div class="level-content">
+            <h3>{{ level.name }}</h3>
+            <p>
+              {{ level.description || 'Build your Mandarin vocabulary.' }}
+            </p>
+          </div>
+
+          <span class="level-arrow" aria-hidden="true">→</span>
+        </a>
+      } @empty {
+        <p>No HSK levels were returned by the API.</p>
+      }
+    }
   </section>
 </main>
