@@ -1,0 +1,130 @@
+<main class="results-page">
+  <header class="results-header">
+    <p class="level-label">HSK {{ level }}</p>
+    <h1>Quiz Results</h1>
+    <p class="subtitle">
+      {{ formatQuizType(quizType()) }}
+    </p>
+  </header>
+
+  @if (result(); as quizResult) {
+    <section class="score-card" aria-labelledby="score-heading">
+      <div class="score-circle">
+        <span class="score-percentage">
+          {{ quizResult.score_percentage | number: '1.0-0' }}%
+        </span>
+        <span class="score-caption">Your score</span>
+      </div>
+
+      <h2 id="score-heading">Quiz Completed!</h2>
+      <p class="score-message">
+        You answered {{ quizResult.correct_count }}
+        out of {{ quizResult.total_questions }} questions correctly.
+      </p>
+
+      <div class="score-stats">
+        <div class="stat-item correct-stat">
+          <span class="stat-number">{{ quizResult.correct_count }}</span>
+          <span class="stat-label">Correct</span>
+        </div>
+
+        <div class="stat-item incorrect-stat">
+          <span class="stat-number">{{ incorrectCount() }}</span>
+          <span class="stat-label">Incorrect</span>
+        </div>
+
+        <div class="stat-item">
+          <span class="stat-number">{{ quizResult.total_questions }}</span>
+          <span class="stat-label">Total</span>
+        </div>
+      </div>
+
+      <div class="results-actions">
+        <button
+          type="button"
+          class="primary-button"
+          (click)="generateMoreQuestions()"
+        >
+          Generate More Questions
+        </button>
+
+        <button
+          type="button"
+          class="secondary-button"
+          (click)="tryAgain()"
+        >
+          Try Again
+        </button>
+
+        <button
+          type="button"
+          class="text-button"
+          (click)="backToStudy()"
+        >
+          Back to Study
+        </button>
+      </div>
+    </section>
+
+    <section class="review-section" aria-labelledby="review-heading">
+      <div class="review-heading">
+        <h2 id="review-heading">Review Your Answers</h2>
+        <p>Check your answers and learn from any mistakes.</p>
+      </div>
+
+      <div class="review-list">
+        @for (item of reviewItems(); track item.question.id; let i = $index) {
+          <article
+            class="review-card"
+            [class.review-correct]="item.correct"
+            [class.review-incorrect]="!item.correct"
+          >
+            <div class="review-card-header">
+              <span class="question-number">
+                Question {{ i + 1 }}
+              </span>
+
+              @if (item.correct) {
+                <span class="answer-status status-correct">
+                  ✓ Correct
+                </span>
+              } @else {
+                <span class="answer-status status-incorrect">
+                  ✕ Incorrect
+                </span>
+              }
+            </div>
+
+            <h3 class="review-prompt">
+              {{ item.question.prompt }}
+            </h3>
+
+            <div class="answer-detail">
+              <span class="answer-label">Your answer</span>
+              <p [class.wrong-answer]="!item.correct">
+                {{ item.userAnswer }}
+              </p>
+            </div>
+
+            @if (!item.correct) {
+              <div class="answer-detail correct-answer-detail">
+                <span class="answer-label">Correct answer</span>
+                <p>{{ item.correctAnswer }}</p>
+              </div>
+            }
+          </article>
+        }
+      </div>
+
+      
+
+      <button
+        type="button"
+        class="secondary-button bottom-study-button"
+        (click)="backToStudy()"
+      >
+        ← Back to Study
+      </button>
+    </section>
+  }
+</main>

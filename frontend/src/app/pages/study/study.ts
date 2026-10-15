@@ -3,6 +3,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { LearningApiService } from '../../core/services/learning-api.service';
+
 import {
   StudyWord,
   StudyWordsResponse,

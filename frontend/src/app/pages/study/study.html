@@ -1,8 +1,4 @@
-
 <main class="study-page">
-  <a class="back-link" routerLink="/">
-    ← Back to HSK levels
-  </a>
 
   <header class="study-header">
     <p class="eyebrow">VOCABULARY STUDY</p>
@@ -10,6 +6,17 @@
     <p class="subtitle">
       Learn each word's Chinese characters, pinyin, and meaning.
     </p>
+
+    <a
+      class="start-quiz-button"
+      [routerLink]="['/quiz', level()]"
+    >
+      Start Quiz →
+    </a>
+    <a class="back-link" routerLink="/">
+      ← Back to HSK levels
+    </a>
+
   </header>
 
   @if (loading()) {
@@ -117,6 +124,9 @@
           </button>
         </nav>
       }
+      
     </section>
+  
   }
+  
 </main>

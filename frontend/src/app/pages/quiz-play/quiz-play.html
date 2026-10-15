@@ -1,0 +1,142 @@
+<main class="quiz-page">
+  <header class="quiz-header">
+    <a class="back-link" [routerLink]="['/study', level]">
+      ← Back to Study
+    </a>
+
+    <p class="level-label">HSK {{ level }}</p>
+    <h1>Vocabulary Quiz</h1>
+    <p class="subtitle">Choose the best answer for each question.</p>
+  </header>
+
+  @if (loading()) {
+    <section class="status-panel" aria-live="polite">
+      <p>Loading quiz questions...</p>
+    </section>
+  } @else if (error() && questionCount() === 0) {
+    <section class="status-panel error-panel" aria-live="polite">
+      <p>{{ error() }}</p>
+
+      <button
+        type="button"
+        class="primary-button"
+        (click)="loadQuestions()"
+      >
+        Try Again
+      </button>
+
+      <button
+        type="button"
+        class="secondary-button"
+        (click)="exitQuiz()"
+      >
+        Back to Study
+      </button>
+    </section>
+  } @else if (currentQuestion(); as question) {
+    <section class="quiz-card">
+      <div class="progress-heading">
+        <span>
+          Question {{ currentIndex() + 1 }} of {{ questionCount() }}
+        </span>
+        <span>{{ answeredCount() }} answered</span>
+      </div>
+
+      <div
+        class="progress-track"
+        role="progressbar"
+        [attr.aria-valuenow]="currentIndex() + 1"
+        [attr.aria-valuemin]="1"
+        [attr.aria-valuemax]="questionCount()"
+        aria-label="Quiz progress"
+      >
+        <div
+          class="progress-fill"
+          [style.width.%]="
+            ((currentIndex() + 1) / questionCount()) * 100
+          "
+        ></div>
+      </div>
+
+      <p class="question-type">
+        {{ question.quiz_type.replaceAll('_', ' ') }}
+      </p>
+
+      <h2 class="question-prompt">{{ question.prompt }}</h2>
+      <p class="question-instruction">Select one answer</p>
+
+      <div class="options-list">
+        @for (option of question.options; track option; let i = $index) {
+          <button
+            type="button"
+            class="option-button"
+            [class.selected]="isSelected(option)"
+            [attr.aria-pressed]="isSelected(option)"
+            [disabled]="submitting()"
+            (click)="selectAnswer(option)"
+          >
+            <span class="option-marker">
+              @if (isSelected(option)) {
+                ✓
+              } @else {
+                {{ i + 1 }}
+              }
+            </span>
+
+            <span>{{ option }}</span>
+          </button>
+        }
+      </div>
+
+      @if (error()) {
+        <p class="inline-error" role="alert">{{ error() }}</p>
+      }
+
+      <footer class="quiz-navigation">
+        <button
+          type="button"
+          class="secondary-button"
+          [disabled]="currentIndex() === 0 || submitting()"
+          (click)="previousQuestion()"
+        >
+          ← Previous
+        </button>
+
+        @if (currentIndex() < questionCount() - 1) {
+          <button
+            type="button"
+            class="primary-button"
+            [disabled]="submitting()"
+            (click)="nextQuestion()"
+          >
+            Next →
+          </button>
+        } @else {
+          <button
+            type="button"
+            class="primary-button"
+            [disabled]="submitting()"
+            (click)="submitQuiz()"
+          >
+            @if (submitting()) {
+              Submitting...
+            } @else {
+              Submit Quiz
+            }
+          </button>
+        }
+      </footer>
+
+      @if (
+        currentIndex() === questionCount() - 1 &&
+        answeredCount() < questionCount()
+      ) {
+        <p class="answer-reminder">
+          You have answered {{ answeredCount() }} of
+          {{ questionCount() }} questions.
+          Answer the rest before submitting.
+        </p>
+      }
+    </section>
+  }
+</main>

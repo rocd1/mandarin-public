@@ -11,12 +11,46 @@
 }
 
 .back-link {
-  display: inline-block;
+  display: block;
   margin-bottom: 2rem;
   color: #34765b;
   font-weight: 600;
   text-decoration: none;
+  text-align: center;
 }
+
+
+.start-quiz-button {
+  display: block;
+  width: fit-content;
+  margin: 24px auto;
+  padding: 10px 24px;
+
+  background: transparent;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+  border-radius: 8px;
+
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.start-quiz-button:hover {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.start-quiz-button:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}
+
 
 .back-link:hover {
   text-decoration: underline;

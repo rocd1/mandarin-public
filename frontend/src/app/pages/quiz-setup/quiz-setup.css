@@ -1,0 +1,142 @@
+
+:host {
+  display: block;
+  min-height: 100%;
+}
+
+.quiz-setup {
+  width: min(100% - 2rem, 960px);
+  margin: 0 auto;
+  padding: 3rem 0;
+}
+
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 0.5rem;
+  color: #64748b;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin: 0;
+  color: #172033;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.2;
+}
+
+.level-label {
+  display: inline-block;
+  margin: 1rem 0 0;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  background: #e8f0ff;
+  color: #244f9e;
+  font-weight: 700;
+}
+
+.intro {
+  margin: 1rem 0 0;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.quiz-card {
+  display: flex;
+  min-height: 220px;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  background: #ffffff;
+  color: #172033;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-3px);
+  border-color: #8aa9e8;
+  box-shadow: 0 8px 24px rgb(15 23 42 / 8%);
+}
+
+.quiz-card:focus-visible {
+  outline: 3px solid #608ce8;
+  outline-offset: 3px;
+}
+
+.quiz-icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 1rem;
+  place-items: center;
+  border-radius: 0.75rem;
+  background: #eef3ff;
+  color: #244f9e;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.quiz-title {
+  margin-bottom: 0.6rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.quiz-description {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.card-action {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  color: #315eb3;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .quiz-setup {
+    padding: 2rem 0;
+  }
+
+  .quiz-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .quiz-card {
+    min-height: 190px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quiz-card {
+    transition: none;
+  }
+
+  .quiz-card:hover {
+    transform: none;
+  }
+}

@@ -6,6 +6,13 @@ import { API_CONFIG } from '../config/api.config';
 import { HSKLevel } from '../models/hsk-level.model';
 import { StudyWordsResponse } from '../../core/models/study-word.model';
 
+import {
+  QuizBatchAnswerResponse,
+  QuizBatchSubmission,
+  QuizQuestionsResponse,
+  QuizType,
+} from '../models/quiz.models';
+
 
 interface PaginatedResponse<T> {
   results: T[];
@@ -46,4 +53,30 @@ export class LearningApiService {
       },
     );
   }
+
+
+  getQuizQuestions(
+    hskLevel: number,
+    quizType: QuizType,
+  ): Observable<QuizQuestionsResponse> {
+    return this.http.get<QuizQuestionsResponse>(
+      `${this.baseUrl}/quiz/questions/`,
+      {
+        params: {
+          hsk_level: hskLevel,
+          quiz_type: quizType,
+        },
+      },
+    );
+  }
+
+  submitQuiz(
+    submission: QuizBatchSubmission,
+  ): Observable<QuizBatchAnswerResponse> {
+    return this.http.post<QuizBatchAnswerResponse>(
+      `${this.baseUrl}/quiz/answers/`,
+      submission,
+    );
+  }
+
 }
