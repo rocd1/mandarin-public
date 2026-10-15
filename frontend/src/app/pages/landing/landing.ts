@@ -1,4 +1,4 @@
-
+import { Footer } from '../../shared/ui/footer/footer';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { LearningApiService } from '../../core/services/learning-api.service';
 
 @Component({
   selector: 'app-landing',
-  imports: [RouterLink],
+  imports: [RouterLink, Footer],
   templateUrl: './landing.html',
   styleUrl: './landing.css',
 })
