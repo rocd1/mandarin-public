@@ -1,55 +1,123 @@
-
 :host {
   display: block;
 }
 
+/* Page layout */
+
 .landing-page {
-  width: min(100% - 2rem, 960px);
+  width: min(100% - 2rem, 1320px);
   margin: 0 auto;
-  padding: 4rem 0;
-  color: #24332d;
+  padding: 3rem 0 0;
+  color: var(--color-text);
 }
 
+/* Hero section */
+
 .hero {
-  padding: 2rem 0 3rem;
+  padding: clamp(2rem, 5vw, 4.5rem) clamp(0rem, 3vw, 2rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
 }
 
 .eyebrow {
-  color: #34765b;
+  margin: 0 0 1rem;
+  color: var(--color-accent);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.15em;
-  text-align: center;
 }
 
-h1 {
-  max-width: 700px;
-  margin: 1rem 0;
-  font-size: clamp(2.3rem, 6vw, 4rem);
-  line-height: 1.12;
+.hero h1 {
+  max-width: 760px;
+  margin: 0 0 1.25rem;
+  color: var(--color-text);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
 }
 
-.subtitle,
-.section-description {
-  max-width: 620px;
-  color: #627168;
+.subtitle {
+  max-width: 650px;
+  margin: 0 0 1.75rem;
+  color: var(--color-text-muted);
+  font-size: clamp(1rem, 2vw, 1.2rem);
   line-height: 1.7;
 }
 
-.levels-section {
-  padding-top: 1rem;
+/* Primary call-to-action */
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.5rem;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-button);
+  background: var(--color-primary);
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
-.levels-section h2 {
-  margin-bottom: 0.5rem;
-  font-size: 1.6rem;
+.hero-button:hover {
+  border-color: var(--color-primary-hover);
+  background: var(--color-primary-hover);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
+
+.hero-button span {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.hero-button:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+/* HSK level section */
+
+.levels-section {
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  scroll-margin-top: 1.5rem;
+}
+
+.section-heading {
+  margin-bottom: 1.75rem;
+  text-align: center;
+}
+
+.section-heading h2 {
+  margin: 0 0 0.5rem;
+  color: var(--color-text);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.section-description {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* Responsive HSK card grid */
 
 .levels-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
 }
 
 .level-card {
@@ -57,40 +125,43 @@ h1 {
   align-items: center;
   gap: 1rem;
   min-width: 0;
+  min-height: 120px;
   padding: 1.25rem;
-  border: 1px solid #dce6df;
-  border-radius: 1rem;
-  background: #fff;
-  color: inherit;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  color: var(--color-text);
   text-decoration: none;
   transition:
     border-color 0.2s ease,
+    background-color 0.2s ease,
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
 
 .level-card:hover {
-  border-color: #34765b;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgb(36 51 45 / 8%);
+  border-color: var(--color-accent);
+  background: #ffffff;
+  box-shadow: var(--shadow-card);
+  transform: translateY(-3px);
 }
 
 .level-card:focus-visible {
-  outline: 3px solid #34765b;
+  outline: 3px solid var(--color-accent);
   outline-offset: 3px;
 }
 
 .level-number {
   display: grid;
   flex-shrink: 0;
-  width: 3rem;
-  height: 3rem;
+  width: 3.5rem;
+  height: 3.5rem;
   place-items: center;
-  border-radius: 0.75rem;
-  background: #e8f3ec;
-  color: #276044;
-  font-size: 1.1rem;
-  font-weight: 700;
+  border-radius: 50%;
+  background: #dfe8ff;
+  color: var(--color-primary);
+  font-size: 1.6rem;
+  font-weight: 800;
 }
 
 .level-content {
@@ -99,40 +170,122 @@ h1 {
 }
 
 .level-content h3 {
-  margin: 0 0 0.4rem;
+  margin: 0 0 0.35rem;
+  color: var(--color-text);
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
 .level-content p {
   margin: 0;
-  color: #627168;
-  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
   line-height: 1.5;
 }
 
 .level-arrow {
-  color: #34765b;
-  font-size: 1.4rem;
+  flex-shrink: 0;
+  color: var(--color-accent);
+  font-size: 1.5rem;
+  transition: transform 0.2s ease;
 }
+
+.level-card:hover .level-arrow {
+  transform: translateX(4px);
+}
+
+/* Loading and error messages */
 
 .status,
 .error {
   margin-top: 1.5rem;
-  padding: 1rem;
-  border-radius: 0.75rem;
-  background: #f3f6f4;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  background: var(--color-surface);
 }
 
 .error {
-  color: #a12626;
+  border-color: #f1caca;
   background: #fff0f0;
+  color: #a12626;
 }
+
+/* Tablet */
+
+@media (max-width: 900px) {
+  .levels-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .level-card {
+    padding: 1rem;
+  }
+}
+
+/* Mobile */
 
 @media (max-width: 600px) {
   .landing-page {
-    padding-top: 2rem;
+    width: min(100% - 1.25rem, 1320px);
+    padding-top: 0.75rem;
   }
 
   .hero {
-    padding-bottom: 2rem;
+    padding: 2rem 1.25rem;
+    border-radius: 14px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.25rem, 10vw, 3rem);
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .hero-button {
+    width: 100%;
+  }
+
+  .levels-section {
+    padding: 2.5rem 0;
+  }
+
+  .section-heading {
+    text-align: left;
+  }
+
+  .levels-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.85rem;
+  }
+
+  .level-card {
+    min-height: 100px;
+    padding: 1rem;
+  }
+
+  .level-number {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.35rem;
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-button,
+  .level-card,
+  .level-arrow {
+    transition: none;
+  }
+
+  .hero-button:hover,
+  .level-card:hover {
+    transform: none;
   }
 }

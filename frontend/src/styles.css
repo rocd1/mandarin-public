@@ -1,1 +1,67 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --color-primary: #293f88;
+  --color-primary-hover: #223570;
+  --color-accent: #5266b5;
+
+  --color-text: #202938;
+  --color-text-muted: #667085;
+
+  --color-background: #ffffff;
+  --color-surface: #f3f6ff;
+  --color-border: #e0e5ed;
+
+  --radius-card: 16px;
+  --radius-button: 10px;
+
+  --shadow-card: 0 8px 24px rgb(32 41 56 / 6%);
+}
+
+
+
+/* Global base styles */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  line-height: 1.6;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}

@@ -7,8 +7,6 @@ import { QuizType } from '../../core/models/quiz.models';
 import { QuizStateService } from '../../core/services/quiz-state.service';
 
 
-
-
 @Component({
   selector: 'app-quiz-results',
   imports: [DecimalPipe],

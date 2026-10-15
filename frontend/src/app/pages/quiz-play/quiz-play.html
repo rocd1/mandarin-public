@@ -1,12 +1,11 @@
 <main class="quiz-page">
   <header class="quiz-header">
+    <p class="level-label">HSK {{ level }}</p>
+    <h1>Vocabulary Quiz</h1>
+    <p class="subtitle">Choose the best answer for each question.</p><br>
     <a class="back-link" [routerLink]="['/study', level]">
       ← Back to Study
     </a>
-
-    <p class="level-label">HSK {{ level }}</p>
-    <h1>Vocabulary Quiz</h1>
-    <p class="subtitle">Choose the best answer for each question.</p>
   </header>
 
   @if (loading()) {

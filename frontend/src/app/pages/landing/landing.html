@@ -1,47 +1,61 @@
-
 <main class="landing-page">
   <header class="hero">
     <p class="eyebrow">MANDARIN VOCABULARY</p>
+
     <h1>Learn Chinese, one word at a time.</h1>
+
     <p class="subtitle">
       Explore HSK vocabulary, learn pinyin and meanings, and practise
       with quizzes. No account required.
     </p>
+
+    <a class="hero-button" href="#levels">
+      Browse HSK Levels
+      <span aria-hidden="true">→</span>
+    </a>
   </header>
 
-  <section class="levels-section" aria-labelledby="levels-heading">
-    <h2 id="levels-heading">Choose your HSK level</h2>
-    <p class="section-description">
-      Start with the level that suits you.
-    </p>
+  <section
+    id="levels"
+    class="levels-section"
+    aria-labelledby="levels-heading"
+  >
+    <div class="section-heading">
+      <h2 id="levels-heading">Choose your HSK level</h2>
+      <p class="section-description">
+        Start with the level that suits you.
+      </p>
+    </div>
 
     @if (loading()) {
       <p class="status" role="status">Loading HSK levels...</p>
     } @else if (error()) {
       <p class="error" role="alert">{{ error() }}</p>
     } @else {
-      @for (level of levels(); track level.id) {
-        <a
-          class="level-card"
-          [routerLink]="['/study', level.order]"
-          [attr.aria-label]="'Study ' + level.name + ' vocabulary'"
-        >
-          <div class="level-number">{{ level.order }}</div>
+      <div class="levels-grid">
+        @for (level of levels(); track level.id) {
+          <a
+            class="level-card"
+            [routerLink]="['/study', level.order]"
+            [attr.aria-label]="'Study ' + level.name + ' vocabulary'"
+          >
+            <div class="level-number">{{ level.order }}</div>
 
-          <div class="level-content">
-            <h3>{{ level.name }}</h3>
-            <p>
-              {{ level.description || 'Build your Mandarin vocabulary.' }}
-            </p>
-          </div>
+            <div class="level-content">
+              <h3>{{ level.name }}</h3>
+              <p>
+                {{ level.description || 'Build your Mandarin vocabulary.' }}
+              </p>
+            </div>
 
-          <span class="level-arrow" aria-hidden="true">→</span>
-        </a>
-      } @empty {
-        <p>No HSK levels were returned by the API.</p>
-      }
+            <span class="level-arrow" aria-hidden="true">→</span>
+          </a>
+        } @empty {
+          <p>No HSK levels were returned by the API.</p>
+        }
+      </div>
     }
   </section>
-  
+
   <app-footer />
 </main>
